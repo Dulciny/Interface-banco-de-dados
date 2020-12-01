@@ -53,25 +53,27 @@ public class Conector {
 		try {
 			con = DriverManager.getConnection(jdbcurl);
 			Statement stmt = con.createStatement();
-			Executor tab = new Executor();
-			ResultSet rs = stmt.executeQuery("select * from " + x);
+			Executor tab = new Executor();			
 
 			if (x.equals("Bebidas")) {
+				ResultSet rs = stmt.executeQuery("select * from " + x  + " order by IDBebida asc");
 				dtm = (DefaultTableModel) tab.table.getModel();
 				while (rs.next()) {
 					dtm.addRow(new Object[] { rs.getInt("IDBebida"), rs.getString("Bebida"), rs.getString("PesoML"),
 							rs.getString("Preço") });
 				}
 			} else if (x.equals("Clientes")) {
+				ResultSet rs = stmt.executeQuery("select * from " + x  + " order by IDCliente asc");
 				dtm = (DefaultTableModel) tab.table2.getModel();
 				while (rs.next()) {
-					dtm.addRow(new Object[] { rs.getInt("IDCliente"), rs.getString("Nome"), rs.getInt("CPF"),
-							rs.getString("Cidade"), rs.getInt("CEP")
+					dtm.addRow(new Object[] { rs.getInt("IDCliente"), rs.getString("Nome"), rs.getString("CPF"),
+							rs.getString("Cidade"), rs.getString("CEP")
 
 					});
 
 				}
 			} else if (x.equals("Vendedores")) {
+				ResultSet rs = stmt.executeQuery("select * from " + x + " order by IDVendedor asc");
 				dtm = (DefaultTableModel) tab.table5.getModel();
 				while (rs.next()) {
 					dtm.addRow(new Object[] { rs.getInt("IDVendedor"), rs.getString("Nome"), rs.getString("Salário")
@@ -79,6 +81,7 @@ public class Conector {
 					});
 				}
 			} else if (x.equals("Tijelas")) {
+				ResultSet rs = stmt.executeQuery("select * from " + x  + " order by IDtijela asc");
 				dtm = (DefaultTableModel) tab.table4.getModel();
 				while (rs.next()) {
 					dtm.addRow(new Object[] { rs.getInt("IDtijela"), rs.getString("Sabor"), rs.getString("PesoML"),
@@ -87,6 +90,7 @@ public class Conector {
 					});
 				}
 			} else if (x.equals("Pedidos")) {
+				ResultSet rs = stmt.executeQuery("select * from " + x  + " order by IDPedido asc");
 				dtm = (DefaultTableModel) tab.table3.getModel();
 				while (rs.next()) {
 					dtm.addRow(new Object[] { rs.getInt("IDPedido"), rs.getInt("IDVendedor"), rs.getString("IDCliente"),

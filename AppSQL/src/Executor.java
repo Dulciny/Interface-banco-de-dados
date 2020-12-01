@@ -10,6 +10,8 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -50,7 +52,7 @@ public class Executor extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		contentPane.setLayout(null);	
 
 		/* Tabelas */
 
@@ -450,7 +452,7 @@ public class Executor extends JFrame {
 			lbl2.setEnabled(true);
 			lbl3.setText("IDCliente");
 			lbl3.setEnabled(true);
-			lbl4.setText("IDSopa");
+			lbl4.setText("IDTijela");
 			lbl4.setEnabled(true);
 			lbl5.setText("Quantidade Sopa");
 			lbl5.setEnabled(true);
@@ -561,7 +563,7 @@ public class Executor extends JFrame {
 
 		} else if (txtNomeTabela.getText().equals("Clientes")) {
 
-			nec.Cadastrar(x, a, "'" + b + "'", c, "'" + d + "'", e, null, null, null);
+			nec.Cadastrar(x, a, "'" + b + "'","'" + c + "'","'" + d + "'", "'" + e + "'", null, null, null);
 
 		} else if (txtNomeTabela.getText().equals("Vendedores")) {
 
@@ -616,7 +618,7 @@ public class Executor extends JFrame {
 		x = txtNomeTabela.getText();
 		int y = Integer.valueOf(textIDAltera.getText());
 		String z = textColunaAltera.getText();
-		String v = " ' " + textValorAltera.getText() + " ' ";
+		String v = " '" + textValorAltera.getText() + "' ";
 
 		nec.Alterar(x, y, z, v);
 		textColunaAltera.setText("");
