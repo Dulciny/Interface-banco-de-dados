@@ -9,6 +9,7 @@ import java.sql.DatabaseMetaData;
 public class Conector {
 	public String x = "";
 
+	/* dados para conectar no servidor */
 	String server = "DESKTOP-673CKKR\\SQLEXPRESS";
 	int port = 51077;
 	String user = "iwo";
@@ -19,6 +20,7 @@ public class Conector {
 	Connection con = null;
 	public DefaultTableModel dtm, dtm2, dtm3, dtm4, dtm5;
 
+	/* conecta e retorna os nomes das tabelas disponiveis */
 	public String Conectar() {
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -49,21 +51,22 @@ public class Conector {
 
 	}
 
+	/* define o layout da tabela */
 	public DefaultTableModel SelTab(String x) {
 		try {
 			con = DriverManager.getConnection(jdbcurl);
 			Statement stmt = con.createStatement();
-			Executor tab = new Executor();			
+			Executor tab = new Executor();
 
 			if (x.equals("Bebidas")) {
-				ResultSet rs = stmt.executeQuery("select * from " + x  + " order by IDBebida asc");
+				ResultSet rs = stmt.executeQuery("select * from " + x + " order by IDBebida asc");
 				dtm = (DefaultTableModel) tab.table.getModel();
 				while (rs.next()) {
 					dtm.addRow(new Object[] { rs.getInt("IDBebida"), rs.getString("Bebida"), rs.getString("PesoML"),
 							rs.getString("Preço") });
 				}
 			} else if (x.equals("Clientes")) {
-				ResultSet rs = stmt.executeQuery("select * from " + x  + " order by IDCliente asc");
+				ResultSet rs = stmt.executeQuery("select * from " + x + " order by IDCliente asc");
 				dtm = (DefaultTableModel) tab.table2.getModel();
 				while (rs.next()) {
 					dtm.addRow(new Object[] { rs.getInt("IDCliente"), rs.getString("Nome"), rs.getString("CPF"),
@@ -81,7 +84,7 @@ public class Conector {
 					});
 				}
 			} else if (x.equals("Tijelas")) {
-				ResultSet rs = stmt.executeQuery("select * from " + x  + " order by IDtijela asc");
+				ResultSet rs = stmt.executeQuery("select * from " + x + " order by IDtijela asc");
 				dtm = (DefaultTableModel) tab.table4.getModel();
 				while (rs.next()) {
 					dtm.addRow(new Object[] { rs.getInt("IDtijela"), rs.getString("Sabor"), rs.getString("PesoML"),
@@ -90,11 +93,11 @@ public class Conector {
 					});
 				}
 			} else if (x.equals("Pedidos")) {
-				ResultSet rs = stmt.executeQuery("select * from " + x  + " order by IDPedido asc");
+				ResultSet rs = stmt.executeQuery("select * from " + x + " order by IDPedido asc");
 				dtm = (DefaultTableModel) tab.table3.getModel();
 				while (rs.next()) {
 					dtm.addRow(new Object[] { rs.getInt("IDPedido"), rs.getInt("IDVendedor"), rs.getString("IDCliente"),
-							rs.getString("IDSopa"), rs.getString("Quantidade_sopa"), rs.getInt("IDBebida"),
+							rs.getString("IDTijela"), rs.getString("Quantidade_sopa"), rs.getInt("IDBebida"),
 							rs.getString("Quantidade_Bebida"), rs.getString("Preço")
 
 					});
@@ -104,13 +107,14 @@ public class Conector {
 			con.close();
 			stmt.close();
 
-		} catch (SQLException e) {			
+		} catch (SQLException e) {
 		}
 
 		return dtm;
 
 	}
 
+	/* deleta dados */
 	public void Deletar(String x, int y) {
 		try {
 			con = DriverManager.getConnection(jdbcurl);
@@ -131,7 +135,7 @@ public class Conector {
 
 			} else if (x.equals("Tijelas")) {
 
-				ResultSet rs = stmt.executeQuery("delete from Tijelas where IDtijela = " + y);
+				ResultSet rs = stmt.executeQuery("delete from Tijelas where IDTijela = " + y);
 
 			} else if (x.equals("Pedidos")) {
 
@@ -148,6 +152,7 @@ public class Conector {
 
 	}
 
+	/* cadastro de dados */
 	public void Cadastrar(String x, String a, String b, String c, String d, String e, String f, String g, String h) {
 		try {
 			con = DriverManager.getConnection(jdbcurl);
@@ -169,13 +174,13 @@ public class Conector {
 
 			} else if (x.equals("Tijelas")) {
 
-				ResultSet rs = stmt.executeQuery("insert into Tijelas(IDtijela, Sabor, PesoML,Preço) Values(" + a + ","
+				ResultSet rs = stmt.executeQuery("insert into Tijelas(IDTijela, Sabor, PesoML,Preço) Values(" + a + ","
 						+ b + "," + c + "," + d + ")");
 
 			} else if (x.equals("Pedidos")) {
 
 				ResultSet rs = stmt.executeQuery(
-						"insert into Pedidos(IDPedido, IDVendedor, IDCliente, IDSopa, Quantidade_Sopa, IDBebida,Quantidade_Bebida,Preço) Values("
+						"insert into Pedidos(IDPedido, IDVendedor, IDCliente, IDTijela, Quantidade_Sopa, IDBebida,Quantidade_Bebida,Preço) Values("
 								+ a + "," + b + "," + c + "," + d + "," + e + "," + f + "," + g + "," + h + ")");
 
 			}
@@ -188,6 +193,7 @@ public class Conector {
 
 	}
 
+	/* altera dados */
 	public void Alterar(String u, int x, String y, String z) {
 		try {
 			con = DriverManager.getConnection(jdbcurl);
@@ -208,7 +214,7 @@ public class Conector {
 
 			} else if (u.equals("Tijelas")) {
 
-				ResultSet rs = stmt.executeQuery("update Tijelas set " + y + " = " + z + " where IDtijela = " + x);
+				ResultSet rs = stmt.executeQuery("update Tijelas set " + y + " = " + z + " where IDTijela = " + x);
 
 			} else if (u.equals("Pedidos")) {
 

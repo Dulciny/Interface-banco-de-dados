@@ -52,7 +52,7 @@ public class Executor extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);	
+		contentPane.setLayout(null);
 
 		/* Tabelas */
 
@@ -81,7 +81,7 @@ public class Executor extends JFrame {
 		contentPane.add(scp3);
 		table3 = new JTable();
 		table3.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "IDPedido", "IDVendedor", "IDCliente",
-				"IDSopa", "Quantidade_Sopa", "IDBebida", "Quantidade_Bebida", "Preço" }));
+				"IDTijela", "Quantidade_Sopa", "IDBebida", "Quantidade_Bebida", "Preço" }));
 		scp3.setViewportView(table3);
 		table3.setVisible(false);
 		scp3.setVisible(false);
@@ -391,6 +391,7 @@ public class Executor extends JFrame {
 
 	}
 
+	/* define tabela */
 	public void tipoTabela() {
 		setBounds(100, 100, 1355, 759);
 		noLBL();
@@ -490,6 +491,7 @@ public class Executor extends JFrame {
 
 	}
 
+	/* tabela invisivel */
 	public void inv() {
 		scp.setVisible(false);
 		scp2.setVisible(false);
@@ -504,6 +506,7 @@ public class Executor extends JFrame {
 
 	}
 
+	/* label invisivel */
 	public void noLBL() {
 
 		lbl1.setText("-");
@@ -532,6 +535,7 @@ public class Executor extends JFrame {
 		text8.setEnabled(false);
 	}
 
+	/* deletar dados */
 	public void del() {
 		x = txtNomeTabela.getText();
 		Conector nec = new Conector();
@@ -544,6 +548,7 @@ public class Executor extends JFrame {
 
 	}
 
+	/* cadastro */
 	public void cadastrar() {
 		Conector nec = new Conector();
 		x = txtNomeTabela.getText();
@@ -563,7 +568,7 @@ public class Executor extends JFrame {
 
 		} else if (txtNomeTabela.getText().equals("Clientes")) {
 
-			nec.Cadastrar(x, a, "'" + b + "'","'" + c + "'","'" + d + "'", "'" + e + "'", null, null, null);
+			nec.Cadastrar(x, a, "'" + b + "'", "'" + c + "'", "'" + d + "'", "'" + e + "'", null, null, null);
 
 		} else if (txtNomeTabela.getText().equals("Vendedores")) {
 
@@ -591,6 +596,7 @@ public class Executor extends JFrame {
 
 	}
 
+	/* escolhe tabela */
 	public void selecTab() {
 		Conector nec = new Conector();
 		x = txtNomeTabela.getText();
@@ -613,6 +619,7 @@ public class Executor extends JFrame {
 
 	}
 
+	/* altera dados */
 	public void Alterar() {
 		Conector nec = new Conector();
 		x = txtNomeTabela.getText();
